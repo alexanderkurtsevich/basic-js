@@ -48,7 +48,9 @@ class VigenereCipheringMachine {
         }
         encryptedMessage = encryptedMessage.toLowerCase()
         let messageLetters = encryptedMessage.match(/[a-z]/g)
-
+        if (messageLetters == null) {
+            return encryptedMessage
+        }
         key = key.toLowerCase().repeat(Math.ceil(messageLetters.length / key.length)).split('')
         key.splice(-(key.length - messageLetters.length), (key.length - messageLetters.length))
         let decryptedCharCodes = [];
