@@ -5,6 +5,9 @@ class VigenereCipheringMachine {
     encrypt(message, key) {
         message = message.toLowerCase()
         let messageLetters = message.match(/[a-z]/g)
+        if (messageLetters == null || key == null) {
+            throw new Error()
+        }
         key = key.toLowerCase().repeat(Math.ceil(messageLetters.length / key.length)).split('')
         key.splice(-(key.length - messageLetters.length), (key.length - messageLetters.length))
         let encryptedCharCodes = [];
@@ -39,6 +42,9 @@ class VigenereCipheringMachine {
     decrypt(encryptedMessage, key) {
         encryptedMessage = encryptedMessage.toLowerCase()
         let messageLetters = encryptedMessage.match(/[a-z]/g)
+        if (messageLetters == null || key == null) {
+            throw new Error()
+        }
         key = key.toLowerCase().repeat(Math.ceil(messageLetters.length / key.length)).split('')
         key.splice(-(key.length - messageLetters.length), (key.length - messageLetters.length))
         let decryptedCharCodes = [];
