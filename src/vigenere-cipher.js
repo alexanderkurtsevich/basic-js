@@ -3,10 +3,13 @@ class VigenereCipheringMachine {
         this.modification = modification
     }
     encrypt(message, key) {
+        if (typeof (message) !== 'string' || typeof (key) !== 'string') {
+            throw new Error()
+        }
         message = message.toLowerCase()
         let messageLetters = message.match(/[a-z]/g)
-        if (messageLetters == null || key == null) {
-            throw new Error()
+        if (messageLetters == null) {
+            return message
         }
         key = key.toLowerCase().repeat(Math.ceil(messageLetters.length / key.length)).split('')
         key.splice(-(key.length - messageLetters.length), (key.length - messageLetters.length))
@@ -40,11 +43,12 @@ class VigenereCipheringMachine {
     }
 
     decrypt(encryptedMessage, key) {
-        encryptedMessage = encryptedMessage.toLowerCase()
-        let messageLetters = encryptedMessage.match(/[a-z]/g)
-        if (messageLetters == null || key == null) {
+        if (typeof (encryptedMessage) !== 'string' || typeof (key) !== 'string') {
             throw new Error()
         }
+        encryptedMessage = encryptedMessage.toLowerCase()
+        let messageLetters = encryptedMessage.match(/[a-z]/g)
+
         key = key.toLowerCase().repeat(Math.ceil(messageLetters.length / key.length)).split('')
         key.splice(-(key.length - messageLetters.length), (key.length - messageLetters.length))
         let decryptedCharCodes = [];
